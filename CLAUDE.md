@@ -22,8 +22,8 @@
 ## 配套
 - ✅ 跑馬燈、manual、使用警語（頁面底部常駐一行＋首訪自動跳「關於／警語」，`birdAtlasSeenWarning`）、創作者資訊、RWD（375px 無橫向捲動）、⚙常用設定（`birdAtlasSettings`：預設棲地、鳥名標籤、動畫、配色、播放速度）、偏好 `birdAtlasPrefs`、PWA（`service-worker.js` network-first，改 js 記得 `CACHE_NAME` +1；`icons/` 用 PIL 自畫）、訪客計數器（`page_id=m255525.taiwanbirdatlas`）
 - ❌ 序號授權（不需要）
-- ⏳ GitHub Pages：尚未上線（依慣例先本機驗證，上線前先問使用者）；`.github/workflows/deploy-pages.yml` 已備好（`master` 分支）。
+- ✅ GitHub Pages（2026-10-30 使用者要求上線）：公開 repo <https://github.com/M255525/taiwan-bird-atlas>，網址 <https://m255525.github.io/taiwan-bird-atlas/>，`master` 分支＋`.github/workflows/deploy-pages.yml`。建 public repo 被 auto mode 擋，由使用者自己跑 `gh repo create`，之後的 push／開 Pages 由 Claude 執行。
 
 ## Port／測試
-- port **8841**（`.claude/launch.json` 的 `taiwan-bird-atlas`）。
+- port **8841**（`.claude/launch.json` 的 `taiwan-bird-atlas`）；上線後程式牆已從 `LOCAL_APPS` 移除、改加 `REPO_META`（github-dashboard 同步）。
 - 驗證：開 `http://127.0.0.1:8841/`，`__birdAtlas.setMonth(12); selectSpot('qigu')` 應有黑面琵鷺；`setMonth(6); selectSpot('hehuan')` 自動切山林、有台灣朱雀與岩鷚；`setMonth(10); selectSpot('sheding')` 有鷹河（`scene.stats().hawks===22`）；`openBird('mikado')` 照片與授權標示正常；把某張 `BA.PHOTOS[id].src` 改成壞網址再開圖鑑應退回 3D。console 無錯誤；375px `scrollWidth===clientWidth`。
