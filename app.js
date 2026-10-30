@@ -270,7 +270,13 @@ function bind(){
   ['btnEtq', 'btnEtq2', 'btnEtq3'].forEach(function(id){ $(id).addEventListener('click', function(){ if (id === 'btnEtq3') closeModal($('about')); openModal('etq'); }); });
   $('btnSet').addEventListener('click', function(){ fillSettings(); openModal('settings'); });
   $('settings').addEventListener('change', saveSettings);
-  $('btnCreator').addEventListener('click', function(){ openModal('about'); var c = $('about').querySelector('.creator-box'); if (c) c.scrollIntoView({block:'nearest'}); });
+  function openAbout(creator){
+    if ($('settings').classList.contains('show')) closeModal($('settings'));
+    openModal('about'); if (creator) $('creatorBox').scrollIntoView({block:'nearest'});
+  }
+  $('btnCreator').addEventListener('click', function(){ openAbout(true); });
+  document.querySelectorAll('[data-open-about]').forEach(function(b){ b.addEventListener('click', function(){ openAbout(b.dataset.openAbout === 'creator'); }); });
+  document.querySelectorAll('[data-open-etq]').forEach(function(b){ b.addEventListener('click', function(){ closeModal($('settings')); openModal('etq'); }); });
   $('btnPrint').addEventListener('click', function(){ window.print(); });
   $('sheetBtn').addEventListener('click', function(){
     var min = $('panel').classList.toggle('min'); document.body.classList.toggle('sheet-min', min); this.textContent = min ? '展開' : '收合';

@@ -207,6 +207,7 @@ button.chip:hover{border-color:#2f2638;background:var(--sun);color:#2f2638}
 .setrow small{display:block;color:var(--mute);font-size:12px}
 .setrow select{font:inherit;padding:6px 8px;border-radius:10px;border:2px solid var(--line);background:var(--paper2);color:var(--ink)}
 .setrow input[type=checkbox]{width:20px;height:20px}
+.setsec{margin:16px 0 8px;font-family:var(--round);font-weight:400;font-size:17px}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .warn-box{background:#3a2226;color:#ffd9d3;border-color:#7a3a35} :root:not([data-theme="light"]) .tipbox{background:#3a3418;color:#ffe9a3} }
 :root[data-theme="dark"] .warn-box{background:#3a2226;color:#ffd9d3;border-color:#7a3a35}
 :root[data-theme="dark"] .tipbox{background:#3a3418;color:#ffe9a3}
@@ -311,8 +312,8 @@ button.chip:hover{border-color:#2f2638;background:var(--sun);color:#2f2638}
   <button class="tbtn hl" id="btnEtq" type="button">🔭 賞鳥須知</button>
   <button class="tbtn" id="btnSet" type="button">⚙ 常用設定</button>
   <button class="tbtn" id="installBtn" type="button">📲 加入主畫面</button>
-  <button class="tbtn" id="btnAbout" type="button">ⓘ 關於／警語</button>
-  <a class="tbtn" href="manual.html" target="_blank" rel="noopener">📖 使用說明</a>
+  <button class="tbtn" id="btnAbout" type="button">⚠ 使用警語</button>
+  <a class="tbtn" href="manual.html" target="_blank" rel="noopener">📖 操作手冊</a>
 </div>
 
 <div id="legend" class="ui card-ui">
@@ -374,6 +375,15 @@ button.chip:hover{border-color:#2f2638;background:var(--sun);color:#2f2638}
     <div class="setrow"><label for="setPlay">自動播放速度</label>
       <select id="setPlay"><option value="4000">慢（4 秒／月）</option><option value="2800">標準（2.8 秒／月）</option><option value="1600">快（1.6 秒／月）</option></select></div>
     <p style="font-size:12px;color:var(--mute);margin:12px 0 0">設定只存在這台裝置的瀏覽器，不會上傳。</p>
+    <h3 class="setsec">關於本工具</h3>
+    <div class="chips">
+      <a class="chip" href="manual.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">📖 操作手冊</a>
+      <button class="chip" type="button" data-open-about>⚠ 使用警語</button>
+      <button class="chip" type="button" data-open-about="creator">👤 創作者資訊</button>
+      <button class="chip" type="button" data-install>📲 加入主畫面</button>
+      <button class="chip" type="button" data-open-etq>🔭 賞鳥須知</button>
+    </div>
+    <p style="font-size:12px;color:var(--mute);margin:10px 0 0;display:flex;align-items:center;gap:8px">訪客數 <img src="https://visitor-badge.laobi.icu/badge?page_id=m255525.taiwanbirdatlas" alt="訪客次數" height="20"></p>
   </div>
 </div>
 
@@ -393,7 +403,7 @@ button.chip:hover{border-color:#2f2638;background:var(--sun);color:#2f2638}
       </ul>
     </div>
     <p style="margin:12px 0 0"><button class="pbtn" type="button" id="btnEtq3">🔭 看賞鳥須知</button></p>
-    <div class="creator-box">
+    <div class="creator-box" id="creatorBox">
       <p style="margin:0"><strong>創作者：Mark Tsai（蔡豐全）</strong></p>
       <p style="margin:4px 0">勞動力發展署創業顧問（2017 起）、經濟部 SBIR 海選專案評審委員（2019－2024），長期擔任小型企業人力提升計畫顧問與多項政府計畫業師、評審委員；專長銷售數據分析、AI 工具運用、政府補助計畫申請、創業與跨境電商。</p>
       <p style="margin:0"><a href="manual.html#creator" target="_blank" rel="noopener">完整經歷與證照</a>｜<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a></p>
@@ -506,7 +516,7 @@ button.chip:hover{border-color:#2f2638;background:var(--sun);color:#2f2638}
     deferredPrompt = null;
   });
 
-  if (btn) {
+  function bindInstall(btn) {
     if (isStandalone) {
       btn.style.display = 'none';
     } else {
@@ -524,6 +534,8 @@ button.chip:hover{border-color:#2f2638;background:var(--sun);color:#2f2638}
       });
     }
   }
+  if (btn) bindInstall(btn);
+  document.querySelectorAll('[data-install]').forEach(bindInstall);
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
