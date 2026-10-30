@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>賞鳥地圖使用說明</title>
+<link href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1f2a3d;--ink2:#4b5a6e;--paper:#fff;--bg:#edf7ee;--line:#d7e6d4;--leaf:#3a9a5a;--wet:#3fb6d8;--low:#7fcf5a;--mtn:#2f8a57}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e8f1ea;--ink2:#c3d4c8;--paper:#17241d;--bg:#0f1a14;--line:#2e463a}}
+:root[data-theme="dark"]{--ink:#e8f1ea;--ink2:#c3d4c8;--paper:#17241d;--bg:#0f1a14;--line:#2e463a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',sans-serif;line-height:1.8}
+main{max-width:860px;margin:0 auto;padding:24px 16px 48px}
+h1,h2{font-family:'Huninn','Noto Sans TC',sans-serif;font-weight:400}
+h1{font-size:30px;margin:0 0 4px}
+h2{font-size:21px;margin:28px 0 8px;border-left:6px solid var(--leaf);padding-left:10px}
+section{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:6px 18px 14px;margin-top:14px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+td,th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}
+.k{display:inline-block;width:12px;height:12px;border-radius:3px;border:2px solid #2f2638;vertical-align:-1px}
+a{color:#2b8fd6;word-break:break-all}
+p,li{color:var(--ink2)}
+</style>
+</head>
+<body>
+<main>
+<h1>台灣賞鳥地圖・使用說明</h1>
+<p><a href="index.html">← 回到 3D 賞鳥地圖</a></p>
+
+<section>
+<h2>這是什麼</h2>
+<p>一張動漫風格的 3D 台灣賞鳥地圖：台灣本島在中間，周邊畫出金門、馬祖、澎湖、蘭嶼等離島。地圖上標了 41 個賞鳥熱點（賞鳥小屋），依你選的「月份」與「棲地」，把當月看得到的鳥放在熱點附近——水鳥在淺灘走動或在水面浮游、猛禽在天空盤旋、小鳥在地上跳來跳去。點任何一隻鳥，就會打開牠的實景照片圖鑑、辨識重點、出現月曆、哪裡看得到與觀察小撇步。</p>
+</section>
+
+<section>
+<h2>基本操作</h2>
+<ol>
+<li><b>選月份</b>：下方的 1–12 月按鈕，或拖曳下面的<b>月份軸線</b>。軸線上每個月有三根長條，分別是 <span class="k" style="background:var(--wet)"></span> 濕地、<span class="k" style="background:var(--low)"></span> 平地、<span class="k" style="background:var(--mtn)"></span> 山林的可見鳥種數，底下色帶是四季。按 ▶ 會自動輪播十二個月；鍵盤 ← → 也能切換。</li>
+<li><b>選棲地</b>：上方「濕地／平地／山林」切換，地圖會把對應的海拔帶打亮。選了熱點時，不屬於該熱點的棲地會變淡。</li>
+<li><b>選熱點</b>：點地圖上的賞鳥小屋或名稱，或用右側（手機在下方）選單先選區域、再選熱點。熱點卡片會列出海拔、最佳季節與「這裡要注意」的事項。</li>
+<li><b>看圖鑑</b>：點地圖上的鳥、鳥名標籤，或清單裡的卡片。圖鑑可以「列印」；點「哪裡看得到」裡的地點會直接飛過去。</li>
+<li><b>鷹河</b>：3–4 月與 9–10 月，地圖上會出現一串沿著中南部南下（或北返）的猛禽，代表灰面鵟鷹與赤腹鷹的過境路線。</li>
+<li><b>⚙ 常用設定</b>：開啟時的預設棲地、是否顯示鳥名標籤、動畫多寡、淺色／深色介面與自動播放速度。</li>
+</ol>
+</section>
+
+<section>
+<h2>三種棲地怎麼分</h2>
+<table>
+<tr><th>棲地</th><th>本工具的定義</th><th>代表鳥種</th></tr>
+<tr><td><span class="k" style="background:var(--wet)"></span> 濕地・海岸</td><td>河口、潮間帶、魚塭、鹽田、埤塘與湖泊。</td><td>黑面琵鷺、高蹺鴴、小水鴨、大杓鷸、小燕鷗</td></tr>
+<tr><td><span class="k" style="background:var(--low)"></span> 平地・郊山</td><td>公園、農田、溪谷與海拔約 1,000 公尺以下的森林。</td><td>五色鳥、台灣藍鵲、黑冠麻鷺、灰面鵟鷹</td></tr>
+<tr><td><span class="k" style="background:var(--mtn)"></span> 中高海拔山林</td><td>海拔約 1,000 公尺以上的森林、箭竹草原與高山岩屑地。</td><td>帝雉、藍腹鷴、台灣朱雀、栗背林鴝</td></tr>
+</table>
+<p>這是為了教學好理解的簡化分法；同一種鳥常會跨不同棲地，冬季也有些山鳥會往低海拔移動。</p>
+</section>
+
+<section>
+<h2>收錄內容</h2>
+<p><b>41 個賞鳥熱點</b>：</p>
+<ul><li>北部：關渡自然公園、華江雁鴨自然公園、台北植物園、金山清水濕地、野柳岬角、陽明山二子坪、烏來南勢溪、許厝港濕地</li><li>東北部：蘭陽溪口、無尾港水鳥保護區、雙連埤、太平山</li><li>中部：高美濕地、大肚溪口、漢寶濕地、八卦山、大雪山林道、合歡山、武陵農場、溪頭自然教育園區、塔塔加</li><li>雲嘉南：湖本村、成龍濕地、鰲鼓濕地、官田水雉復育區、七股黑面琵鷺保護區、四草濕地、阿里山</li><li>南部：藤枝、鳥松濕地、墾丁社頂、滿州里德、龍鑾潭</li><li>東部：花蓮溪口、太魯閣布洛灣、大農大富平地森林、知本森林遊樂區</li><li>離島：金門慈湖、馬祖燕鷗保護區、澎湖青螺濕地、蘭嶼</li></ul>
+<p><b>60 種鳥</b>：黑面琵鷺、小白鷺、大白鷺、蒼鷺、夜鷺、高蹺鴴、反嘴鴴、東方環頸鴴、黑腹濱鷸、大杓鷸、小水鴨、尖尾鴨、琵嘴鴨、赤頸鴨、小鸊鷉、鸕鷀、水雉、小燕鷗、白眉燕鷗、黑嘴端鳳頭燕鷗、燕鴴、翠鳥、紅冠水雞、白腹秧雞、彩鷸、魚鷹、黑冠麻鷺、黃頭鷺、黑翅鳶、大冠鷲、鳳頭蒼鷹、灰面鵟鷹、赤腹鷹、領角鴞、蘭嶼角鴞、八色鳥、台灣藍鵲、五色鳥、白頭翁、烏頭翁、斯氏繡眼、紅尾伯勞、藍磯鶇、台灣紫嘯鶇、鉛色水鶇、朱鸝、栗喉蜂虎、戴勝、藍腹鷴、帝雉、台灣山鷓鴣、冠羽畫眉、火冠戴菊鳥、栗背林鴝、白耳畫眉、台灣噪眉、台灣朱雀、岩鷚、黃山雀、紋翼畫眉。每種都有辨識重點、棲地、行為與叫聲、觀察小撇步、易混淆鳥種、出現月曆與保育等級。</p>
+<p>★ 代表鳥種＝該熱點特別有代表性的鳥（例如七股的黑面琵鷺、官田的水雉、合歡山的台灣朱雀、墾丁社頂的灰面鵟鷹）。</p>
+</section>
+
+<section>
+<h2>賞鳥須知（重點）</h2>
+<ul>
+<li>保持距離：鳥停止覓食、抬頭盯著你、緊張鳴叫，就是太近了。</li>
+<li>不餵食、不誘鳥、不播放鳥音；不為拍照折枝或撥開植物。</li>
+<li>繁殖期遠離巢區；地上的離巢幼鳥多數仍有親鳥照顧，不要撿走。</li>
+<li>濕地先查潮汐、高山注意保暖與高山症、溪谷注意落石與暴漲。</li>
+<li>遵守保護區與國家公園規定；私有魚塭、農田、部落未經同意不進入。</li>
+<li>發現受傷鳥類可撥 1999 或聯絡縣市動保、野鳥救傷單位；發現違法捕鳥請通報。</li>
+</ul>
+<p>完整內容請按地圖上的「🔭 賞鳥須知」。</p>
+</section>
+
+<section>
+<h2>注意事項</h2>
+<ul>
+<li>鳥種出現的季節、地點與數量為一般性參考，實際鳥況每年受天候、遷徙時程與棲地變化影響。</li>
+<li>海岸線、島嶼大小、山的高度與鳥的大小都經過簡化與誇大，不可用於導航或登山路線規劃。</li>
+<li>保育等級依《野生動物保育法》保育類名錄整理，可能隨公告調整，請以農業部最新公告為準。</li>
+<li>3D 地圖需要網路下載繪圖元件，實景照片需要網路連到 Wikimedia；照片無法載入時，圖鑑會改以 3D 模型示意。你選的棲地、熱點與常用設定只記在這台裝置的瀏覽器，不會上傳。</li>
+<li>本工具的文字說明、介面與 3D 模型僅供教學、課程及個人使用，禁止未經授權公開發布、販售或商業化使用。</li>
+</ul>
+</section>
+
+<section id="photos">
+<h2>照片來源與授權</h2>
+<p>圖鑑中的實景照片全部取自 <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>，只採用 CC0、公有領域、CC BY 或 CC BY-SA 等允許再利用的授權，並依授權條款標示作者、授權與來源；照片未經修改（僅由 Wikimedia 縮圖服務縮小尺寸）。照片版權屬原作者，若要轉載請依各照片的授權條款標示。照片為物種示意，拍攝地點、亞種或性別可能與台灣個體不同。</p>
+<div class="tw"><table>
+<tr><th>鳥種</th><th>作者</th><th>授權</th><th>來源檔案</th></tr>
+<tr><td>黑面琵鷺</td><td>Cp9asngf</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Black_faced_spoonbill_at_Niigata.JPG" target="_blank" rel="noopener">Black faced spoonbill at Niigata.JPG</a></td></tr>
+<tr><td>小白鷺</td><td>Shantanu Kuveskar</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Little_egret_(Egretta_garzetta)_Photograph_by_Shantanu_Kuveskar.jpg" target="_blank" rel="noopener">Little egret (Egretta garzetta) Photograph by Shantanu Kuveskar.jpg</a></td></tr>
+<tr><td>大白鷺</td><td>Chuck Homler (FocusOnWildlife.Me)</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Great_Egret_(Ardea_alba)_in_Breeding_Plumage,_Cape_May_County,_New_Jersey,_USA_(cropped).png" target="_blank" rel="noopener">Great Egret (Ardea alba) in Breeding Plumage, Cape May County, New Jersey, USA (cropped).png</a></td></tr>
+<tr><td>蒼鷺</td><td>Giacomo Cimino (foto.giacomocimino.workers.dev · @giacomociminoph)</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Il_pescatore_solitario.jpg" target="_blank" rel="noopener">Il pescatore solitario.jpg</a></td></tr>
+<tr><td>夜鷺</td><td>ramidos</td><td><a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener">CC BY 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Nycticorax_nycticorax_457953189.jpg" target="_blank" rel="noopener">Nycticorax nycticorax 457953189.jpg</a></td></tr>
+<tr><td>高蹺鴴</td><td>Charles J. Sharp</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Black-winged_stilt_(Himantopus_himantopus)_Pearaing.jpg" target="_blank" rel="noopener">Black-winged stilt (Himantopus himantopus) Pearaing.jpg</a></td></tr>
+<tr><td>反嘴鴴</td><td>Andreas Trepte</td><td><a href="https://creativecommons.org/licenses/by-sa/2.5" target="_blank" rel="noopener">CC BY-SA 2.5</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Pied_Avocet_Recurvirostra_avosetta.jpg" target="_blank" rel="noopener">Pied Avocet Recurvirostra avosetta.jpg</a></td></tr>
+<tr><td>東方環頸鴴</td><td>Original: Davidvraju, edit: MPF</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Kentish_Plover_Charadrius_alexandrinus,_India.jpg" target="_blank" rel="noopener">Kentish Plover Charadrius alexandrinus, India.jpg</a></td></tr>
+<tr><td>黑腹濱鷸</td><td>Charles Homler d/b/a FocusOnWildlife</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Dunlin_(Calidris_alpina)_in_the_Delaware_Bay_at_Heislerville_Wildlife_Management_Area,_New_Jersey,_USA.png" target="_blank" rel="noopener">Dunlin (Calidris alpina) in the Delaware Bay at Heislerville Wildlife Management Area, New Jersey, USA.png</a></td></tr>
+<tr><td>大杓鷸</td><td>Andreas Trepte</td><td><a href="https://creativecommons.org/licenses/by-sa/2.5" target="_blank" rel="noopener">CC BY-SA 2.5</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Eurasian_Curlew.jpg" target="_blank" rel="noopener">Eurasian Curlew.jpg</a></td></tr>
+<tr><td>小水鴨</td><td>Charles J. Sharp</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Eurasian_teal_(Anas_crecca_crecca)_male_Qingshui.jpg" target="_blank" rel="noopener">Eurasian teal (Anas crecca crecca) male Qingshui.jpg</a></td></tr>
+<tr><td>尖尾鴨</td><td>J.M.Garg</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Northern_Pintails_(Male_%26_Female)_I_IMG_0911.jpg" target="_blank" rel="noopener">Northern Pintails (Male &amp; Female) I IMG 0911.jpg</a></td></tr>
+<tr><td>琵嘴鴨</td><td>Charles J. Sharp</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Northern_shoveler_(Spatula_clypeata)_male_Marken.jpg" target="_blank" rel="noopener">Northern shoveler (Spatula clypeata) male Marken.jpg</a></td></tr>
+<tr><td>赤頸鴨</td><td>Laitche</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Eurasian_wigeon_in_Sakai,_Osaka,_February_2016.jpg" target="_blank" rel="noopener">Eurasian wigeon in Sakai, Osaka, February 2016.jpg</a></td></tr>
+<tr><td>小鸊鷉</td><td>Andreas Trepte</td><td><a href="https://creativecommons.org/licenses/by-sa/2.5" target="_blank" rel="noopener">CC BY-SA 2.5</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Little_grebe_Zwergtaucher.jpg" target="_blank" rel="noopener">Little grebe Zwergtaucher.jpg</a></td></tr>
+<tr><td>鸕鷀</td><td>MPF</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:2021-05-05_Phalacrocorax_carbo_carbo,_Killingworth_Lake,_Northumberland_1-1.jpg" target="_blank" rel="noopener">2021-05-05 Phalacrocorax carbo carbo, Killingworth Lake, Northumberland 1-1.jpg</a></td></tr>
+<tr><td>水雉</td><td>Charles J. Sharp</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Pheasant-tailed_jacanas_(Hydrophasianus_chirurgus)_pair_cr.jpg" target="_blank" rel="noopener">Pheasant-tailed jacanas (Hydrophasianus chirurgus) pair cr.jpg</a></td></tr>
+<tr><td>小燕鷗</td><td>PetroKaterynych</td><td><a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener">CC BY 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:%D0%9A%D1%80%D1%8F%D1%87%D0%BE%D0%BA_%D0%BC%D0%B0%D0%BB%D0%B8%D0%B9.jpg" target="_blank" rel="noopener">Крячок малий.jpg</a></td></tr>
+<tr><td>白眉燕鷗</td><td>Charles J. Sharp</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Bridled_tern_(Onychoprion_anaethetus_anaethetus)_breeding_Rock_Islands.jpg" target="_blank" rel="noopener">Bridled tern (Onychoprion anaethetus anaethetus) breeding Rock Islands.jpg</a></td></tr>
+<tr><td>黑嘴端鳳頭燕鷗</td><td>Oregon State University</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Chinese_crested_tern_colony.jpg" target="_blank" rel="noopener">Chinese crested tern colony.jpg</a></td></tr>
+<tr><td>燕鴴</td><td>JJ Harrison (https://www.jjharrison.com.au/)</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Glareola_maldivarum_-_Beung_Borapet.jpg" target="_blank" rel="noopener">Glareola maldivarum - Beung Borapet.jpg</a></td></tr>
+<tr><td>翠鳥</td><td>Tony Wood</td><td><a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Alcedo_atthis_-England-8_(cropped).jpg" target="_blank" rel="noopener">Alcedo atthis -England-8 (cropped).jpg</a></td></tr>
+<tr><td>紅冠水雞</td><td>Alexis Lours</td><td><a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener">CC BY 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Common_moorhen_(Gallinula_chloropus)_France.jpg" target="_blank" rel="noopener">Common moorhen (Gallinula chloropus) France.jpg</a></td></tr>
+<tr><td>白腹秧雞</td><td>JJ Harrison (https://tiny.jjharrison.com.au/t/zpppq3u5TIMicNgw)</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Amaurornis_phoenicurus_-_Singapore_Botanic_Gardens.jpg" target="_blank" rel="noopener">Amaurornis phoenicurus - Singapore Botanic Gardens.jpg</a></td></tr>
+<tr><td>彩鷸</td><td>Bernard DUPONT from FRANCE</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Greater_Painted-snipe_(Rostratula_benghalensis)_male,_Kruger_NP_(53247730001).jpg" target="_blank" rel="noopener">Greater Painted-snipe (Rostratula benghalensis) male, Kruger NP (53247730001).jpg</a></td></tr>
+<tr><td>魚鷹</td><td>Chuck Homler / Focus On Wildlife</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Osprey_Perched_Snag_Heislerville.jpg" target="_blank" rel="noopener">Osprey Perched Snag Heislerville.jpg</a></td></tr>
+<tr><td>黑冠麻鷺</td><td>Francesco Veronesi from Italy</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Malayan_Night-Heron_-_Taiwan_S4E8695_(17320173361).jpg" target="_blank" rel="noopener">Malayan Night-Heron - Taiwan S4E8695 (17320173361).jpg</a></td></tr>
+<tr><td>黃頭鷺</td><td>Hari K Patibanda</td><td><a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:A_Cattle_Egret_Balancing_on_a_Goat_(50126917227).jpg" target="_blank" rel="noopener">A Cattle Egret Balancing on a Goat (50126917227).jpg</a></td></tr>
+<tr><td>黑翅鳶</td><td>Tisha Mukherjee</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Black-winged_Kite_in_Tal_Chhapar_Sanctuary_November_2025_by_Tisha_Mukherjee_03.jpg" target="_blank" rel="noopener">Black-winged Kite in Tal Chhapar Sanctuary November 2025 by Tisha Mukherjee 03.jpg</a></td></tr>
+<tr><td>大冠鷲</td><td>Yathin S Krishnappa</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Spilornis_cheela_(Bandipur,_2008).jpg" target="_blank" rel="noopener">Spilornis cheela (Bandipur, 2008).jpg</a></td></tr>
+<tr><td>鳳頭蒼鷹</td><td>Swardeepak</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:C-Goshawk-Sandeep.jpg" target="_blank" rel="noopener">C-Goshawk-Sandeep.jpg</a></td></tr>
+<tr><td>灰面鵟鷹</td><td>M.Nishimura</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Butastur_indicus.jpg" target="_blank" rel="noopener">Butastur indicus.jpg</a></td></tr>
+<tr><td>赤腹鷹</td><td>(c) anukma, some rights reserved (CC BY)</td><td><a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener">CC BY 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Chinese_Sparrowhawk_imported_from_iNaturalist_photo_52731117_on_17_June_2024.jpg" target="_blank" rel="noopener">Chinese Sparrowhawk imported from iNaturalist photo 52731117 on 17 June 2024.jpg</a></td></tr>
+<tr><td>領角鴞</td><td>JJ Harrison</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Collared_Scops_Owl_0A2A6332.jpg" target="_blank" rel="noopener">Collared Scops Owl 0A2A6332.jpg</a></td></tr>
+<tr><td>蘭嶼角鴞</td><td>陳達智</td><td><a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener">CC BY 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Otus_elegans_botelensis_45117517.jpg" target="_blank" rel="noopener">Otus elegans botelensis 45117517.jpg</a></td></tr>
+<tr><td>八色鳥</td><td>Alnus</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Fairy_Pitta_3952,_crop.jpg" target="_blank" rel="noopener">Fairy Pitta 3952, crop.jpg</a></td></tr>
+<tr><td>台灣藍鵲</td><td>Charles J. Sharp</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Taiwan_blue_magpie_(Urocissa_caerulea)_Xindian.jpg" target="_blank" rel="noopener">Taiwan blue magpie (Urocissa caerulea) Xindian.jpg</a></td></tr>
+<tr><td>五色鳥</td><td>Charles J. Sharp</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Taiwan_barbet_(Psilopogon_nuchalis)_Qianshan.jpg" target="_blank" rel="noopener">Taiwan barbet (Psilopogon nuchalis) Qianshan.jpg</a></td></tr>
+<tr><td>白頭翁</td><td>Flickr user CharlesLam . Photo uploaded to commons by user ltshears</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Light-vented_Bulbul2.jpg" target="_blank" rel="noopener">Light-vented Bulbul2.jpg</a></td></tr>
+<tr><td>烏頭翁</td><td>Francesco Veronesi from Italy</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Styan%27s_Bulbul_-_Taiwan_S4E5288_(17052025025).jpg" target="_blank" rel="noopener">Styan's Bulbul - Taiwan S4E5288 (17052025025).jpg</a></td></tr>
+<tr><td>斯氏繡眼</td><td>Charles Lam</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Resting_Zosterops_japonicus.jpg" target="_blank" rel="noopener">Resting Zosterops japonicus.jpg</a></td></tr>
+<tr><td>紅尾伯勞</td><td>Tisha Mukherjee</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Brown_Shrike_in_Bakkhali_September_2024_by_Tisha_Mukherjee_01.jpg" target="_blank" rel="noopener">Brown Shrike in Bakkhali September 2024 by Tisha Mukherjee 01.jpg</a></td></tr>
+<tr><td>藍磯鶇</td><td>jose maria carretero palacios from jerez de los caballeros, españa</td><td><a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Monticola_solitarius,_Spain_1.jpg" target="_blank" rel="noopener">Monticola solitarius, Spain 1.jpg</a></td></tr>
+<tr><td>台灣紫嘯鶇</td><td>Charles J. Sharp</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Taiwan_whistling-thrush_(Myophonus_insularis)_Qianshan.jpg" target="_blank" rel="noopener">Taiwan whistling-thrush (Myophonus insularis) Qianshan.jpg</a></td></tr>
+<tr><td>鉛色水鶇</td><td>JJ Harrison (https://www.jjharrison.com.au/)</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Rhyacornis_fuliginosus_-_Doi_Inthanon.jpg" target="_blank" rel="noopener">Rhyacornis fuliginosus - Doi Inthanon.jpg</a></td></tr>
+<tr><td>朱鸝</td><td>Anjan Kumar Kundu</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Maroon_Oriole.jpg" target="_blank" rel="noopener">Maroon Oriole.jpg</a></td></tr>
+<tr><td>栗喉蜂虎</td><td>Tisha Mukherjee</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Blue-tailed_Bee-eater_in_Sundarbans_National_Park_July_2025_by_Tisha_Mukherjee_03.jpg" target="_blank" rel="noopener">Blue-tailed Bee-eater in Sundarbans National Park July 2025 by Tisha Mukherjee 03.jpg</a></td></tr>
+<tr><td>戴勝</td><td>Greg Schechter from San Francisco, USA</td><td><a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Israel._Eurasian_Hoopoe_(6497645007).jpg" target="_blank" rel="noopener">Israel. Eurasian Hoopoe (6497645007).jpg</a></td></tr>
+<tr><td>藍腹鷴</td><td>Alnus</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Swinhoe%27s_Pheasant_0673.jpg" target="_blank" rel="noopener">Swinhoe's Pheasant 0673.jpg</a></td></tr>
+<tr><td>帝雉</td><td>Snowyowls (photographer) / Jako (uploader)</td><td><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Mikado_Pheasant_398.jpg" target="_blank" rel="noopener">Mikado Pheasant 398.jpg</a></td></tr>
+<tr><td>台灣山鷓鴣</td><td>https://www.flickr.com/photos/francesco_veronesi/</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Taiwan_partridge_(Arborophila_crudigularis).jpg" target="_blank" rel="noopener">Taiwan partridge (Arborophila crudigularis).jpg</a></td></tr>
+<tr><td>冠羽畫眉</td><td>Francesco Veronesi from Italy</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Taiwan_Yuhina_-_Taiwan_S4E8280_(18926478463).jpg" target="_blank" rel="noopener">Taiwan Yuhina - Taiwan S4E8280 (18926478463).jpg</a></td></tr>
+<tr><td>火冠戴菊鳥</td><td>Cathy200008</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:TarokoNP-chen07.jpg" target="_blank" rel="noopener">TarokoNP-chen07.jpg</a></td></tr>
+<tr><td>栗背林鴝</td><td>Robert tdc</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Collared_Bush_Robin.jpg" target="_blank" rel="noopener">Collared Bush Robin.jpg</a></td></tr>
+<tr><td>白耳畫眉</td><td>Francesco Veronesi from Italy</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:White-eared_Sibia_-_Taiwan_S4E8153_(19547305835).jpg" target="_blank" rel="noopener">White-eared Sibia - Taiwan S4E8153 (19547305835).jpg</a></td></tr>
+<tr><td>台灣噪眉</td><td>Sammy Sam</td><td><a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Garrulax_morrisonianus_-Taiwan-8.jpg" target="_blank" rel="noopener">Garrulax morrisonianus -Taiwan-8.jpg</a></td></tr>
+<tr><td>台灣朱雀</td><td>Wang Yu Jie</td><td><a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Hehuanshan_Wang_Yu_Jie_20140912_01_(cropped).jpg" target="_blank" rel="noopener">Hehuanshan Wang Yu Jie 20140912 01 (cropped).jpg</a></td></tr>
+<tr><td>岩鷚</td><td>Paco Gómez from Castellón, Spain</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Alpine_accentor_saganta.jpg" target="_blank" rel="noopener">Alpine accentor saganta.jpg</a></td></tr>
+<tr><td>黃山雀</td><td>Robert tdc</td><td><a href="https://creativecommons.org/licenses/by-sa/2.0" target="_blank" rel="noopener">CC BY-SA 2.0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Taiwan_tit.jpg" target="_blank" rel="noopener">Taiwan tit.jpg</a></td></tr>
+<tr><td>紋翼畫眉</td><td>longan Jiang</td><td><a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" rel="noopener">CC0</a></td><td><a href="https://commons.wikimedia.org/wiki/File:Actinodure_de_Ta%C3%AFwan.jpg" target="_blank" rel="noopener">Actinodure de Taïwan.jpg</a></td></tr>
+</table></div>
+</section>
+
+<section id="creator">
+<h2>創作者</h2>
+<p><b>Mark Tsai（蔡豐全）</b>：勞動力發展署創業顧問（2017 起）、經濟部 SBIR 海選專案評審委員（2019－2024），長期擔任小型企業人力提升計畫顧問與多項政府計畫業師、評審委員；專長銷售數據分析、AI 工具運用、政府補助計畫申請、創業與跨境電商。聯絡：<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a></p>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>賞鳥地圖使用說明</title>
+<link href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1f2a3d;--ink2:#4b5a6e;--paper:#fff;--bg:#edf7ee;--line:#d7e6d4;--leaf:#3a9a5a;--wet:#3fb6d8;--low:#7fcf5a;--mtn:#2f8a57}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e8f1ea;--ink2:#c3d4c8;--paper:#17241d;--bg:#0f1a14;--line:#2e463a}}
+:root[data-theme="dark"]{--ink:#e8f1ea;--ink2:#c3d4c8;--paper:#17241d;--bg:#0f1a14;--line:#2e463a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',sans-serif;line-height:1.8}
+main{max-width:860px;margin:0 auto;padding:24px 16px 48px}
+h1,h2{font-family:'Huninn','Noto Sans TC',sans-serif;font-weight:400}
+h1{font-size:30px;margin:0 0 4px}
+h2{font-size:21px;margin:28px 0 8px;border-left:6px solid var(--leaf);padding-left:10px}
+section{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:6px 18px 14px;margin-top:14px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+td,th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}
+.k{display:inline-block;width:12px;height:12px;border-radius:3px;border:2px solid #2f2638;vertical-align:-1px}
+a{color:#2b8fd6;word-break:break-all}
+p,li{color:var(--ink2)}
+</style>
+</head>
+<body>
+<main>
+<h1>台灣賞鳥地圖・使用說明</h1>
+<p><a href="index.html">← 回到 3D 賞鳥地圖</a></p>
+
+<section>
+<h2>這是什麼</h2>
+<p>一張動漫風格的 3D 台灣賞鳥地圖：台灣本島在中間，周邊畫出金門、馬祖、澎湖、蘭嶼等離島。地圖上標了 {{NS}} 個賞鳥熱點（賞鳥小屋），依你選的「月份」與「棲地」，把當月看得到的鳥放在熱點附近——水鳥在淺灘走動或在水面浮游、猛禽在天空盤旋、小鳥在地上跳來跳去。點任何一隻鳥，就會打開牠的實景照片圖鑑、辨識重點、出現月曆、哪裡看得到與觀察小撇步。</p>
+</section>
+
+<section>
+<h2>基本操作</h2>
+<ol>
+<li><b>選月份</b>：下方的 1–12 月按鈕，或拖曳下面的<b>月份軸線</b>。軸線上每個月有三根長條，分別是 <span class="k" style="background:var(--wet)"></span> 濕地、<span class="k" style="background:var(--low)"></span> 平地、<span class="k" style="background:var(--mtn)"></span> 山林的可見鳥種數，底下色帶是四季。按 ▶ 會自動輪播十二個月；鍵盤 ← → 也能切換。</li>
+<li><b>選棲地</b>：上方「濕地／平地／山林」切換，地圖會把對應的海拔帶打亮。選了熱點時，不屬於該熱點的棲地會變淡。</li>
+<li><b>選熱點</b>：點地圖上的賞鳥小屋或名稱，或用右側（手機在下方）選單先選區域、再選熱點。熱點卡片會列出海拔、最佳季節與「這裡要注意」的事項。</li>
+<li><b>看圖鑑</b>：點地圖上的鳥、鳥名標籤，或清單裡的卡片。圖鑑可以「列印」；點「哪裡看得到」裡的地點會直接飛過去。</li>
+<li><b>鷹河</b>：3–4 月與 9–10 月，地圖上會出現一串沿著中南部南下（或北返）的猛禽，代表灰面鵟鷹與赤腹鷹的過境路線。</li>
+<li><b>⚙ 常用設定</b>：開啟時的預設棲地、是否顯示鳥名標籤、動畫多寡、淺色／深色介面與自動播放速度。</li>
+</ol>
+</section>
+
+<section>
+<h2>三種棲地怎麼分</h2>
+<table>
+<tr><th>棲地</th><th>本工具的定義</th><th>代表鳥種</th></tr>
+<tr><td><span class="k" style="background:var(--wet)"></span> 濕地・海岸</td><td>河口、潮間帶、魚塭、鹽田、埤塘與湖泊。</td><td>黑面琵鷺、高蹺鴴、小水鴨、大杓鷸、小燕鷗</td></tr>
+<tr><td><span class="k" style="background:var(--low)"></span> 平地・郊山</td><td>公園、農田、溪谷與海拔約 1,000 公尺以下的森林。</td><td>五色鳥、台灣藍鵲、黑冠麻鷺、灰面鵟鷹</td></tr>
+<tr><td><span class="k" style="background:var(--mtn)"></span> 中高海拔山林</td><td>海拔約 1,000 公尺以上的森林、箭竹草原與高山岩屑地。</td><td>帝雉、藍腹鷴、台灣朱雀、栗背林鴝</td></tr>
+</table>
+<p>這是為了教學好理解的簡化分法；同一種鳥常會跨不同棲地，冬季也有些山鳥會往低海拔移動。</p>
+</section>
+
+<section>
+<h2>收錄內容</h2>
+<p><b>{{NS}} 個賞鳥熱點</b>：</p>
+<ul><li>{{SPOTS}}</li></ul>
+<p><b>{{NB}} 種鳥</b>：{{NAMES}}。每種都有辨識重點、棲地、行為與叫聲、觀察小撇步、易混淆鳥種、出現月曆與保育等級。</p>
+<p>★ 代表鳥種＝該熱點特別有代表性的鳥（例如七股的黑面琵鷺、官田的水雉、合歡山的台灣朱雀、墾丁社頂的灰面鵟鷹）。</p>
+</section>
+
+<section>
+<h2>賞鳥須知（重點）</h2>
+<ul>
+<li>保持距離：鳥停止覓食、抬頭盯著你、緊張鳴叫，就是太近了。</li>
+<li>不餵食、不誘鳥、不播放鳥音；不為拍照折枝或撥開植物。</li>
+<li>繁殖期遠離巢區；地上的離巢幼鳥多數仍有親鳥照顧，不要撿走。</li>
+<li>濕地先查潮汐、高山注意保暖與高山症、溪谷注意落石與暴漲。</li>
+<li>遵守保護區與國家公園規定；私有魚塭、農田、部落未經同意不進入。</li>
+<li>發現受傷鳥類可撥 1999 或聯絡縣市動保、野鳥救傷單位；發現違法捕鳥請通報。</li>
+</ul>
+<p>完整內容請按地圖上的「🔭 賞鳥須知」。</p>
+</section>
+
+<section>
+<h2>注意事項</h2>
+<ul>
+<li>鳥種出現的季節、地點與數量為一般性參考，實際鳥況每年受天候、遷徙時程與棲地變化影響。</li>
+<li>海岸線、島嶼大小、山的高度與鳥的大小都經過簡化與誇大，不可用於導航或登山路線規劃。</li>
+<li>保育等級依《野生動物保育法》保育類名錄整理，可能隨公告調整，請以農業部最新公告為準。</li>
+<li>3D 地圖需要網路下載繪圖元件，實景照片需要網路連到 Wikimedia；照片無法載入時，圖鑑會改以 3D 模型示意。你選的棲地、熱點與常用設定只記在這台裝置的瀏覽器，不會上傳。</li>
+<li>本工具的文字說明、介面與 3D 模型僅供教學、課程及個人使用，禁止未經授權公開發布、販售或商業化使用。</li>
+</ul>
+</section>
+
+<section id="photos">
+<h2>照片來源與授權</h2>
+<p>圖鑑中的實景照片全部取自 <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>，只採用 CC0、公有領域、CC BY 或 CC BY-SA 等允許再利用的授權，並依授權條款標示作者、授權與來源；照片未經修改（僅由 Wikimedia 縮圖服務縮小尺寸）。照片版權屬原作者，若要轉載請依各照片的授權條款標示。照片為物種示意，拍攝地點、亞種或性別可能與台灣個體不同。</p>
+<div class="tw"><table>
+<tr><th>鳥種</th><th>作者</th><th>授權</th><th>來源檔案</th></tr>
+{{ROWS}}
+</table></div>
+</section>
+
+<section id="creator">
+<h2>創作者</h2>
+<p><b>Mark Tsai（蔡豐全）</b>：勞動力發展署創業顧問（2017 起）、經濟部 SBIR 海選專案評審委員（2019－2024），長期擔任小型企業人力提升計畫顧問與多項政府計畫業師、評審委員；專長銷售數據分析、AI 工具運用、政府補助計畫申請、創業與跨境電商。聯絡：<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a></p>
+</section>
+</main>
+</body>
+</html>

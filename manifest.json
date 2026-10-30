@@ -1,0 +1,16 @@
+{
+  "name": "台灣賞鳥地圖",
+  "short_name": "賞鳥地圖",
+  "description": "動漫風 3D 台灣賞鳥地圖：選熱點、月份與棲地，看當月有哪些鳥，點鳥看實景照片圖鑑與賞鳥須知。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#3a9a5a",
+  "theme_color": "#3a9a5a",
+  "lang": "zh-TW",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

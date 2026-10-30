@@ -1,0 +1,13 @@
+const fs = require('fs'), path = require('path');
+const dir = process.argv[2], tplPath = process.argv[3];
+global.window = {};
+new Function(fs.readFileSync(path.join(dir, 'data.js'), 'utf8'))();
+const BA = window.BA;
+new Function('BA', fs.readFileSync(path.join(dir, 'photos.js'), 'utf8'))(BA);
+const e = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rows = BA.BIRDS.map(b => { const p = BA.PHOTOS[b.id];
+  return '<tr><td>' + e(b.name) + '</td><td>' + (p ? e(p.author) : '—') + '</td><td>' + (p ? '<a href="' + e(p.licenseUrl || p.page) + '" target="_blank" rel="noopener">' + e(p.license) + '</a>' : '3D 模型') + '</td><td>' + (p ? '<a href="' + e(p.page) + '" target="_blank" rel="noopener">' + e(p.file) + '</a>' : '—') + '</td></tr>'; }).join('\n');
+const spots = BA.REGIONS.map(r => r.name + '：' + BA.SPOTS.filter(s => s.r === r.id).map(s => s.name).join('、')).join('</li><li>');
+let out = fs.readFileSync(tplPath, 'utf8').replace('{{ROWS}}', rows).replace('{{SPOTS}}', spots).replace('{{NAMES}}', BA.BIRDS.map(b => b.name).join('、')).replace(/\{\{NB\}\}/g, BA.BIRDS.length).replace(/\{\{NS\}\}/g, BA.SPOTS.length);
+fs.writeFileSync(path.join(dir, 'manual.html'), out);
+console.log('manual ok', BA.BIRDS.length, Object.keys(BA.PHOTOS).length);

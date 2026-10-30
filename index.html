@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>台灣賞鳥地圖</title>
+<meta name="description" content="動漫風 3D 台灣賞鳥地圖：選賞鳥熱點、月份與棲地（濕地、平地、山林），看當月有哪些鳥，點鳥看實景照片圖鑑、觀察要點與賞鳥須知。">
+<meta name="theme-color" content="#3a9a5a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="賞鳥地圖">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<style>
+:root{
+  --ink:#1f2a3d; --ink2:#4b5a6e; --mute:#7a8799; --paper:#ffffff; --paper2:#f2f8f1; --line:#d7e6d4;
+  --coral:#ff7a59; --sun:#ffc94a; --leaf:#3a9a5a; --sea:#2b8fd6; --navy:#1d3b5c;
+  --wet:#3fb6d8; --low:#7fcf5a; --mtn:#2f8a57; --shadow:0 10px 30px rgba(22,60,40,.18); --mq:0px;
+  --r:18px; --font:'Noto Sans TC',system-ui,sans-serif; --round:'Huninn','Noto Sans TC',sans-serif;
+  --sky1:#9fdcff; --sky2:#e3f6ff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --ink:#e8f1ea; --ink2:#c3d4c8; --mute:#93a69a; --paper:#17241d; --paper2:#1e3027; --line:#2e463a; --shadow:0 10px 30px rgba(0,0,0,.45); }
+}
+:root[data-theme="dark"]{ --ink:#e8f1ea; --ink2:#c3d4c8; --mute:#93a69a; --paper:#17241d; --paper2:#1e3027; --line:#2e463a; --shadow:0 10px 30px rgba(0,0,0,.45); }
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:var(--font);color:var(--ink);background:#bfe6f7;-webkit-font-smoothing:antialiased}
+body.has-marquee{--mq:30px}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--sea)}
+#marqueeBar{position:fixed;top:0;left:0;right:0;height:30px;background:var(--leaf);color:#fff;z-index:1500;overflow:hidden;display:none;align-items:center;font-size:13px;font-weight:700}
+#marqueeBar.show{display:flex}
+#marqueeTrack{display:inline-block;white-space:nowrap;padding-left:100%;animation:marquee 30s linear infinite}
+#marqueeBar:hover #marqueeTrack{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+#stage{position:fixed;left:0;right:0;bottom:0;top:var(--mq);background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 55%,#bfe6f7 100%);transition:background .8s}
+#stage canvas{display:block;width:100%;height:100%;touch-action:none}
+#labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lab3d{position:absolute;left:0;top:0;white-space:nowrap;transition:opacity .2s;will-change:transform}
+.lab3d.off{opacity:0;pointer-events:none!important}
+.plab{pointer-events:auto;border:2px solid #fff;background:rgba(29,59,48,.84);color:#fff;font-family:var(--round);font-size:12px;padding:2px 8px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.plab:hover,.plab.on{background:var(--coral)}
+.plab.on{font-size:14px;padding:3px 10px}
+.slab{pointer-events:auto;border:2.5px solid #2f2638;background:#fffdf5;color:#2f2638;font-family:var(--round);font-size:13px;padding:2px 9px 2px 6px;border-radius:12px;box-shadow:2px 3px 0 #2f2638;display:flex;align-items:center;gap:5px}
+.slab i{width:11px;height:11px;border-radius:50%;border:2px solid #2f2638;display:inline-block}
+.slab b{color:#e8a000;font-size:12px}
+.slab:hover,.slab.on{background:var(--sun)}
+.slab.hawk{background:#fff1d6;font-size:14px}
+.ilab{font-family:var(--round);color:#2a3c66;font-size:15px;text-shadow:0 0 4px #fff,0 0 8px #fff;letter-spacing:.1em}
+.ilab.main{font-size:26px;color:#1d5a3c;letter-spacing:.4em}
+.pk{font-size:11px;color:#3b4b3a;text-shadow:0 0 3px #fff,0 0 6px #fff}
+.sealab{font-family:var(--round);font-size:16px;color:rgba(255,255,255,.85);letter-spacing:.5em;text-shadow:0 1px 3px rgba(16,60,120,.45)}
+
+.ui{position:fixed;z-index:20}
+.card-ui{background:var(--paper);border:2.5px solid #2f2638;border-radius:var(--r);box-shadow:4px 5px 0 rgba(47,38,56,.85)}
+#brand{left:14px;top:calc(var(--mq) + 12px);padding:10px 14px 10px 12px;display:flex;gap:10px;align-items:center;max-width:330px}
+#brand svg{flex:none}
+#brand h1{margin:0;font-family:var(--round);font-size:20px;line-height:1.15;font-weight:400}
+#brand p{margin:2px 0 0;font-size:12px;color:var(--ink2)}
+#ctrl{left:360px;right:378px;bottom:14px;padding:8px 10px;display:flex;gap:10px;align-items:center;justify-content:center}
+#months{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+#months::-webkit-scrollbar{display:none}
+.mbtn{flex:none;border:2px solid transparent;background:var(--paper2);border-radius:12px;padding:4px 7px;font-family:var(--round);font-size:14px;min-width:42px;line-height:1.1}
+.mbtn small{display:block;font-size:10px;color:var(--mute)}
+.mbtn.on{background:var(--sun);border-color:#2f2638;color:#2f2638}
+.mbtn.on small{color:#5a4a20}
+.mbtn.now::after{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--coral);margin:2px auto 0}
+.mwrap{display:flex;flex-direction:column;gap:2px;min-width:0;max-width:100%}
+#axis{position:relative;height:50px;margin:0 2px}
+#axBars{position:absolute;left:0;right:0;top:0;height:34px;display:grid;grid-template-columns:repeat(12,1fr);gap:4px;align-items:end}
+.axc{display:flex;justify-content:center;align-items:flex-end;gap:1px;height:100%;border-radius:6px 6px 0 0;position:relative}
+.axc.on{background:rgba(255,201,74,.35)}
+.axc i{width:5px;border-radius:3px 3px 0 0;border:1.5px solid #2f2638;border-bottom:0;min-height:2px;transition:height .4s}
+.axc i.wet{background:var(--wet)} .axc i.low{background:var(--low)} .axc i.mtn{background:var(--mtn)}
+.axc i.dim{opacity:.3}
+.axc b{position:absolute;left:0;right:0;text-align:center;font-size:10px;font-weight:700;color:var(--coral);display:none}
+.axc.on b{display:block;top:-13px}
+#axLine{position:absolute;left:0;right:0;top:36px;height:8px;display:grid;grid-template-columns:repeat(12,1fr);border:2px solid #2f2638;border-radius:6px;overflow:hidden}
+#axLine span{display:block}
+#mRange{position:absolute;left:calc((100% - 44px) / 24 - 11px);width:calc(100% - (100% - 44px) / 12 + 22px);top:22px;margin:0;height:30px;background:transparent;-webkit-appearance:none;appearance:none;cursor:grab}
+#mRange::-webkit-slider-runnable-track{height:30px;background:transparent}
+#mRange::-moz-range-track{height:30px;background:transparent}
+#mRange::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:4px;border-radius:50%;background:var(--coral);border:2.5px solid #2f2638;box-shadow:0 2px 0 #2f2638}
+#mRange::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--coral);border:2.5px solid #2f2638}
+#mRange:focus-visible::-webkit-slider-thumb{outline:3px solid var(--sun)}
+#play{flex:none;width:38px;height:38px;border-radius:50%;border:2.5px solid #2f2638;background:var(--coral);color:#fff;font-size:15px}
+#play.on{background:var(--leaf)}
+#hab{left:360px;top:calc(var(--mq) + 12px);padding:6px;display:flex;gap:4px}
+.hbtn{border:2px solid transparent;border-radius:12px;background:transparent;padding:6px 11px;font-family:var(--round);font-size:15px;display:flex;align-items:center;gap:6px}
+.hbtn i{width:14px;height:14px;border-radius:4px;border:2px solid #2f2638}
+.hbtn.on{border-color:#2f2638;background:var(--paper2)}
+.hbtn.na{opacity:.45}
+.hbtn[data-h="wet"] i{background:var(--wet)} .hbtn[data-h="low"] i{background:var(--low)} .hbtn[data-h="mtn"] i{background:var(--mtn)}
+
+#panel{right:14px;top:calc(var(--mq) + 12px);bottom:14px;width:350px;display:flex;flex-direction:column;overflow:hidden}
+#panelHead{padding:12px 14px 10px;border-bottom:2px dashed var(--line);max-height:48%;overflow-y:auto}
+.selrow{display:flex;gap:6px}
+.selrow select{flex:1;min-width:0;font:inherit;font-size:14px;padding:7px 8px;border-radius:10px;border:2px solid var(--line);background:var(--paper2);color:var(--ink)}
+#place{margin-top:10px}
+#place h2{margin:0;font-family:var(--round);font-weight:400;font-size:20px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+#place h2 small{font-family:var(--font);font-size:12px;color:var(--mute)}
+#place p{margin:4px 0 0;font-size:13px;color:var(--ink2);line-height:1.55}
+.meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.meta span{font-size:11.5px;border-radius:999px;padding:1px 8px;background:var(--paper2);border:1.5px solid var(--line);color:var(--ink2)}
+.meta span.h-wet{border-color:var(--wet)} .meta span.h-low{border-color:var(--low)} .meta span.h-mtn{border-color:var(--mtn)}
+details.tips{margin-top:6px;font-size:12.5px;color:var(--ink2)}
+details.tips summary{cursor:pointer;color:#b0552e;font-weight:700}
+details.tips ul{margin:4px 0 0;padding-left:18px;line-height:1.6}
+#sum{margin-top:8px;font-size:13px;background:var(--paper2);border-radius:10px;padding:6px 10px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+#sum b{font-family:var(--round);font-weight:400;font-size:16px;color:var(--coral)}
+#panelFoot{display:flex;justify-content:space-between;align-items:center;gap:6px 8px;flex-wrap:wrap;padding:7px 12px;border-top:2px dashed var(--line);font-size:12px;color:var(--mute)}
+#panelFoot button{border:0;background:none;padding:0;color:var(--sea);text-decoration:underline;font-size:12px}
+#panelFoot img{display:block}
+#panelFoot .warnline{flex-basis:100%;color:#a0462a}
+#list{flex:1;overflow-y:auto;padding:10px 12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:start}
+.bcard{border:2px solid var(--line);background:var(--paper);border-radius:14px;padding:6px 8px 8px;text-align:left;display:flex;flex-direction:column;gap:2px;transition:transform .15s,border-color .15s}
+.bcard:hover,.bcard.on{border-color:#2f2638;transform:translateY(-2px);box-shadow:3px 3px 0 #2f2638}
+.bcard .pic{height:74px;border-radius:10px;overflow:hidden;position:relative;background:linear-gradient(160deg,#dff3e2,#bfe3c8);display:flex;align-items:center;justify-content:center;font-size:30px}
+.bcard .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bcard .pic .st{position:absolute;left:4px;top:4px;font-size:10.5px;background:rgba(255,255,255,.92);color:#2f2638;border-radius:6px;padding:0 5px;border:1.5px solid #2f2638;z-index:1}
+.bcard b{font-family:var(--round);font-weight:400;font-size:15px;margin-top:3px}
+.bcard b em{font-style:normal;color:#e8a000;font-size:12px;margin-left:3px}
+.bcard small{font-size:11px;color:var(--mute);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.empty{grid-column:1/-1;text-align:center;color:var(--mute);font-size:13px;padding:24px 8px;line-height:1.7}
+.empty button{margin-top:8px}
+
+#legend{left:14px;bottom:14px;padding:8px 12px;font-size:12px;color:var(--ink2);max-width:330px;line-height:1.6}
+#legend .row{display:flex;align-items:center;gap:6px}
+#legend i{width:12px;height:12px;border-radius:3px;border:2px solid #2f2638;display:inline-block}
+#tools{left:14px;bottom:132px;display:flex;flex-direction:column;gap:6px}
+.tbtn{border:2.5px solid #2f2638;background:var(--paper);border-radius:12px;padding:6px 10px;font-size:13px;box-shadow:2px 3px 0 #2f2638;text-align:left}
+.tbtn:hover{background:var(--sun);color:#2f2638}
+.tbtn.hl{background:#fff1d6;color:#2f2638}
+a.tbtn{text-decoration:none;color:var(--ink)}
+
+#loading{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(180deg,#9fdcff,#e3f6ff);transition:opacity .6s;font-family:var(--round);font-size:18px;color:#1d3b5c}
+#loading.hide{opacity:0;pointer-events:none}
+#loading svg{animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+#loading small{font-family:var(--font);font-size:13px;color:#4b5a6e;max-width:300px;text-align:center}
+
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(15,40,30,.45)}
+.modal.show{display:flex}
+.sheet{background:var(--paper);border:3px solid #2f2638;border-radius:22px;box-shadow:6px 7px 0 #2f2638;width:min(940px,100%);max-height:calc(100vh - 32px);overflow:auto;position:relative}
+.x{position:absolute;right:12px;top:12px;width:38px;height:38px;border-radius:50%;border:2.5px solid #2f2638;background:var(--paper);font-size:18px;z-index:2}
+.x:hover{background:var(--coral);color:#fff}
+#birdHead{display:grid;grid-template-columns:minmax(0,400px) 1fr;gap:18px;padding:18px 18px 8px;align-items:start}
+#phWrap{border-radius:16px;border:2px solid #2f2638;overflow:hidden;background:#e6f2e6;position:relative}
+#phImg{display:block;width:100%;height:260px;object-fit:cover;background:#dfeee0}
+#pv[hidden],#phImg[hidden]{display:none!important}
+#pv{display:block;width:100%;height:260px;background:radial-gradient(ellipse at 50% 40%,#f1fbef,#bfe3c8)}
+#phCredit{font-size:11.5px;line-height:1.5;color:var(--ink2);padding:6px 10px;border-top:2px solid #2f2638;background:var(--paper2)}
+#phCredit .note{color:var(--mute)}
+#birdTitle h2{margin:0;font-family:var(--round);font-weight:400;font-size:30px;line-height:1.15;padding-right:40px}
+#birdTitle .en{color:var(--ink2);font-size:14px;margin-top:4px}
+#birdTitle .sci{font-style:italic;color:var(--mute);font-size:14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{font-size:12px;border-radius:999px;padding:3px 10px;border:2px solid #2f2638;background:var(--paper2)}
+.tag.wet{background:var(--wet);color:#0e2a33} .tag.low{background:var(--low);color:#14300c} .tag.mtn{background:var(--mtn);color:#fff}
+.tag.end{background:var(--sun);color:#2f2638}
+.tag.cons{background:#ffe1d8;color:#8a2a12;border-color:#8a2a12}
+.tag.st{background:#fff;color:#2f2638}
+.quick{margin-top:12px;font-size:14px;line-height:1.7;color:var(--ink2)}
+.sec{padding:8px 18px 4px}
+.sec h3{margin:10px 0 6px;font-family:var(--round);font-weight:400;font-size:18px;display:flex;align-items:center;gap:8px}
+.sec h3::before{content:'';width:10px;height:10px;border-radius:3px;background:var(--leaf);border:2px solid #2f2638}
+.sec p{margin:0;line-height:1.75;font-size:14.5px;color:var(--ink2)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px}
+.tipbox{border:2.5px dashed #e8a000;background:#fff8e1;color:#5a4300;border-radius:14px;padding:10px 14px;line-height:1.75;font-size:14.5px}
+.cal{display:grid;grid-template-columns:76px repeat(12,1fr);gap:3px;font-size:12px;align-items:center}
+.cal .h{text-align:center;color:var(--mute)}
+.cal .h.cur{color:var(--coral);font-weight:700}
+.cal .z{font-family:var(--round);font-size:13px}
+.cal .c{height:22px;border-radius:6px;background:var(--paper2);border:1.5px solid var(--line);position:relative}
+.cal .c.yes.wet{background:var(--wet);border-color:#2f2638}
+.cal .c.yes.low{background:var(--low);border-color:#2f2638}
+.cal .c.yes.mtn{background:var(--mtn);border-color:#2f2638}
+.cal .c.cur{outline:2.5px solid var(--coral);outline-offset:1px}
+.cal .c.here::after{content:'';position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#fff;border:1.5px solid #2f2638}
+.calnote{font-size:12px;color:var(--mute);margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;border:2px solid var(--line);background:var(--paper2);border-radius:999px;padding:3px 10px}
+button.chip:hover{border-color:#2f2638;background:var(--sun);color:#2f2638}
+.chip.hot{border-color:#e8a000}
+.mfoot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 18px 18px;flex-wrap:wrap}
+.mfoot small{color:var(--mute);font-size:12px;max-width:600px;line-height:1.5}
+.pbtn{border:2.5px solid #2f2638;background:var(--sun);color:#2f2638;border-radius:12px;padding:8px 14px;font-family:var(--round);box-shadow:2px 3px 0 #2f2638}
+.pad .sheet{width:min(760px,100%);padding:20px 22px}
+.pad h2{font-family:var(--round);font-weight:400;margin:0 0 10px;padding-right:44px}
+.warn-box{border:2px solid #f0b4ac;background:#fff3f1;color:#6a2a22;border-radius:14px;padding:10px 14px;font-size:13.5px;line-height:1.7}
+.warn-box ul{margin:6px 0 0;padding-left:20px}
+.creator-box{margin-top:12px;border:2px solid var(--line);border-radius:14px;padding:10px 14px;font-size:13.5px;line-height:1.7;color:var(--ink2)}
+.etq{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.etq section{border:2px solid var(--line);border-radius:14px;padding:8px 12px;background:var(--paper2)}
+.etq h3{margin:0 0 4px;font-family:var(--round);font-weight:400;font-size:17px}
+.etq ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.65;color:var(--ink2)}
+.setrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1.5px dashed var(--line);font-size:14px;flex-wrap:wrap}
+.setrow small{display:block;color:var(--mute);font-size:12px}
+.setrow select{font:inherit;padding:6px 8px;border-radius:10px;border:2px solid var(--line);background:var(--paper2);color:var(--ink)}
+.setrow input[type=checkbox]{width:20px;height:20px}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .warn-box{background:#3a2226;color:#ffd9d3;border-color:#7a3a35} :root:not([data-theme="light"]) .tipbox{background:#3a3418;color:#ffe9a3} }
+:root[data-theme="dark"] .warn-box{background:#3a2226;color:#ffd9d3;border-color:#7a3a35}
+:root[data-theme="dark"] .tipbox{background:#3a3418;color:#ffe9a3}
+
+#sheetBtn{display:none}
+@media (max-width:1180px){
+  #legend{display:none}
+  #ctrl{left:14px;justify-content:flex-start}
+  #tools{bottom:124px}
+}
+@media (max-width:760px){
+  #brand{left:10px;right:10px;top:calc(var(--mq) + 8px);max-width:none;padding:7px 10px}
+  #brand h1{font-size:17px}
+  #brand p{display:none}
+  #brand svg{width:34px;height:34px}
+  #ctrl{left:10px;right:10px;top:calc(var(--mq) + 62px);bottom:auto;padding:6px 8px}
+  .mbtn{min-width:38px;padding:3px 5px;font-size:13px}
+  #hab{left:auto;right:10px;top:calc(var(--mq) + 176px);padding:4px}
+  .hbtn{padding:4px 7px;font-size:13px}
+  #panel{left:0;right:0;bottom:0;top:auto;width:auto;height:46vh;border-radius:20px 20px 0 0;border-bottom:0;transition:height .3s}
+  #panel.min{height:118px}
+  #sheetBtn{display:block;position:absolute;right:10px;top:8px;border:2px solid var(--line);background:var(--paper2);border-radius:10px;font-size:12px;padding:3px 8px;z-index:2}
+  #panelHead{padding:10px 12px 8px}
+  .selrow{padding-right:58px}
+  #place p,#place .meta{display:none}
+  #tools{left:10px;bottom:calc(46vh + 10px);flex-direction:row;flex-wrap:wrap;right:10px;gap:4px}
+  body.sheet-min #tools{bottom:128px}
+  .tbtn{padding:4px 6px;font-size:11px;white-space:nowrap;box-shadow:1px 2px 0 #2f2638}
+  #birdHead{grid-template-columns:1fr;padding:14px 14px 6px}
+  #phImg,#pv{height:210px}
+  #birdTitle h2{font-size:24px}
+  .sec{padding:6px 14px 2px}
+  .cols,.etq{grid-template-columns:1fr}
+  .cal{grid-template-columns:44px repeat(12,1fr);font-size:10px}
+  .cal .z{font-size:11px}
+  .modal{padding:8px}
+}
+@media print{
+  body *{visibility:hidden}
+  #bird, #bird *{visibility:visible}
+  #bird{position:absolute;inset:0;background:#fff;display:block;padding:0}
+  #bird .sheet{box-shadow:none;border:0;max-height:none;overflow:visible}
+  .x,.mfoot button{display:none!important}
+  #birdHead{grid-template-columns:300px 1fr}
+}
+@media (prefers-reduced-motion: reduce){ #loading svg,#marqueeTrack{animation:none} }
+</style>
+</head>
+<body>
+<div id="marqueeBar"><div id="marqueeTrack"></div></div>
+
+<div id="stage"><div id="labels"></div></div>
+
+<header id="brand" class="ui card-ui">
+  <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+    <circle cx="22" cy="22" r="20" fill="#9fdcff" stroke="#2f2638" stroke-width="2.5"/>
+    <path d="M4 30l10-12 7 7 6-9 13 14a20 20 0 0 1-36 0z" fill="#3a9a5a" stroke="#2f2638" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M6 33c6 2 12 2 16 0s12-2 16 0" fill="none" stroke="#3fb6d8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M14 13c3-3 6-2 8 0 2-2 5-3 8 0" fill="none" stroke="#2f2638" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <div><h1>台灣賞鳥地圖</h1><p>選熱點、月份與棲地，看這個月有哪些鳥</p></div>
+</header>
+
+<nav id="ctrl" class="ui card-ui" aria-label="月份">
+  <div class="mwrap">
+    <div id="months" role="tablist"></div>
+    <div id="axis" title="拖曳月份軸線切換月份；長條＝該月三種棲地可見鳥種數">
+      <div id="axBars"></div>
+      <div id="axLine"></div>
+      <input type="range" id="mRange" min="1" max="12" step="1" aria-label="月份軸線">
+    </div>
+  </div>
+  <button id="play" type="button" title="自動播放十二個月" aria-label="自動播放">▶</button>
+</nav>
+
+<div id="hab" class="ui card-ui" role="radiogroup" aria-label="棲地">
+  <button class="hbtn" data-h="wet" type="button" role="radio" title="河口、潮間帶、魚塭、湖泊"><i></i>濕地</button>
+  <button class="hbtn" data-h="low" type="button" role="radio" title="公園、農田、溪谷、海拔約 1,000 公尺以下"><i></i>平地</button>
+  <button class="hbtn" data-h="mtn" type="button" role="radio" title="海拔約 1,000 公尺以上的森林與高山"><i></i>山林</button>
+</div>
+
+<aside id="panel" class="ui card-ui" aria-label="鳥種清單">
+  <button id="sheetBtn" type="button">收合</button>
+  <div id="panelHead">
+    <div class="selrow">
+      <select id="selRegion" aria-label="區域"></select>
+      <select id="selSpot" aria-label="賞鳥熱點"></select>
+    </div>
+    <div id="place"></div>
+    <div id="sum"></div>
+  </div>
+  <div id="list"></div>
+  <div id="panelFoot">
+    <span class="warnline">⚠ 鳥況為一般參考；請保持距離、不餵食、不播鳥音。<button type="button" id="btnEtq2">賞鳥須知</button></span>
+    <span>創作者：<button type="button" id="btnCreator">Mark Tsai（蔡豐全）</button></span>
+    <img src="https://visitor-badge.laobi.icu/badge?page_id=m255525.taiwanbirdatlas" alt="訪客次數" height="20">
+  </div>
+</aside>
+
+<div id="tools" class="ui">
+  <button class="tbtn" id="btnAll" type="button">🗺 看全台</button>
+  <button class="tbtn hl" id="btnEtq" type="button">🔭 賞鳥須知</button>
+  <button class="tbtn" id="btnSet" type="button">⚙ 常用設定</button>
+  <button class="tbtn" id="installBtn" type="button">📲 加入主畫面</button>
+  <button class="tbtn" id="btnAbout" type="button">ⓘ 關於／警語</button>
+  <a class="tbtn" href="manual.html" target="_blank" rel="noopener">📖 使用說明</a>
+</div>
+
+<div id="legend" class="ui card-ui">
+  <div class="row"><i style="background:var(--wet)"></i>濕地・海岸：河口、潮間帶、魚塭、湖泊</div>
+  <div class="row"><i style="background:var(--low)"></i>平地・郊山：海拔約 1,000 公尺以下</div>
+  <div class="row"><i style="background:var(--mtn)"></i>中高海拔山林：約 1,000 公尺以上</div>
+  <div class="row">🛖 賞鳥熱點　★ 代表鳥種　・點鳥看實景照片圖鑑</div>
+</div>
+
+<div id="loading">
+  <svg width="120" height="80" viewBox="0 0 120 80" aria-hidden="true">
+    <path d="M8 70l26-30 16 16 18-26 44 40z" fill="#3a9a5a" stroke="#2f2638" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M30 22c6-7 12-6 16 0 4-6 10-7 16 0" fill="none" stroke="#2f2638" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M70 12c4-4 8-3 10 0 3-3 6-4 10 0" fill="none" stroke="#2f2638" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+  <div id="loadMsg">望遠鏡對焦中，正在把島嶼畫出來…</div>
+  <small id="loadSub">第一次開啟需要下載 3D 繪圖元件</small>
+</div>
+
+<div id="bird" class="modal" role="dialog" aria-modal="true" aria-labelledby="birdName">
+  <div class="sheet">
+    <button class="x" type="button" data-close aria-label="關閉">✕</button>
+    <div id="birdHead">
+      <figure id="phWrap" style="margin:0">
+        <img id="phImg" alt="" referrerpolicy="no-referrer">
+        <canvas id="pv" hidden></canvas>
+        <figcaption id="phCredit"></figcaption>
+      </figure>
+      <div id="birdTitle"></div>
+    </div>
+    <div id="birdBody"></div>
+    <div class="mfoot">
+      <small>出現季節與地點為一般性參考，實際鳥況受天候與遷徙時程影響；保育等級以農業部最新公告為準。</small>
+      <button class="pbtn" id="btnPrint" type="button">🖨 列印圖鑑</button>
+    </div>
+  </div>
+</div>
+
+<div id="etq" class="modal pad" role="dialog" aria-modal="true" aria-labelledby="etqTitle">
+  <div class="sheet">
+    <button class="x" type="button" data-close aria-label="關閉">✕</button>
+    <h2 id="etqTitle">🔭 賞鳥須知</h2>
+    <p style="margin:0 0 12px;color:var(--ink2);font-size:14px">賞鳥最重要的一件事：<b>鳥的安全與自在，永遠比我們看到、拍到更重要。</b></p>
+    <div class="etq" id="etqBody"></div>
+  </div>
+</div>
+
+<div id="settings" class="modal pad" role="dialog" aria-modal="true" aria-labelledby="setTitle">
+  <div class="sheet">
+    <button class="x" type="button" data-close aria-label="關閉">✕</button>
+    <h2 id="setTitle">⚙ 常用設定</h2>
+    <div class="setrow"><label for="setHab">開啟時的棲地<small>「記住上次」會沿用你最後選的棲地</small></label>
+      <select id="setHab"><option value="last">記住上次</option><option value="wet">濕地・海岸</option><option value="low">平地・郊山</option><option value="mtn">中高海拔山林</option></select></div>
+    <div class="setrow"><label for="setLabels">地圖上顯示鳥名標籤<small>關掉後畫面比較乾淨，點鳥仍可開圖鑑</small></label><input type="checkbox" id="setLabels"></div>
+    <div class="setrow"><label for="setMotion">動畫<small>減少動態：鳥與海浪動得比較慢</small></label>
+      <select id="setMotion"><option value="auto">跟隨系統</option><option value="full">完整動畫</option><option value="reduce">減少動態</option></select></div>
+    <div class="setrow"><label for="setTheme">介面配色</label>
+      <select id="setTheme"><option value="auto">跟隨系統</option><option value="light">淺色</option><option value="dark">深色</option></select></div>
+    <div class="setrow"><label for="setPlay">自動播放速度</label>
+      <select id="setPlay"><option value="4000">慢（4 秒／月）</option><option value="2800">標準（2.8 秒／月）</option><option value="1600">快（1.6 秒／月）</option></select></div>
+    <p style="font-size:12px;color:var(--mute);margin:12px 0 0">設定只存在這台裝置的瀏覽器，不會上傳。</p>
+  </div>
+</div>
+
+<div id="about" class="modal pad" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+  <div class="sheet">
+    <button class="x" type="button" data-close aria-label="關閉">✕</button>
+    <h2 id="aboutTitle">關於台灣賞鳥地圖</h2>
+    <div class="warn-box">
+      <strong>使用警語</strong>
+      <ul>
+        <li>鳥種出現的季節、地點與數量為一般性參考，整理自常見的賞鳥紀錄與保育單位公開說法；實際鳥況每年受天候、遷徙時程與棲地變化影響，不保證當月一定看得到。</li>
+        <li>地圖上的海岸線、島嶼大小、山高與鳥的大小都經過簡化與誇大，不可作為導航或登山路線依據；出發前請自行查詢路況、潮汐、天候與園區開放時間。</li>
+        <li>賞鳥請遵守「不餵食、不誘鳥、不播放鳥音、不靠近巢」等原則，保護區與國家公園請依規定活動，詳見「🔭 賞鳥須知」。</li>
+        <li>保育等級依《野生動物保育法》保育類名錄整理，可能隨公告調整，請以農業部最新公告為準。</li>
+        <li>圖鑑實景照片取自 Wikimedia Commons，均為 CC0、CC BY 或 CC BY-SA 授權，每張照片下方標示作者、授權條款與來源連結；照片版權屬原作者，轉載請依各授權條款標示。照片為物種示意，拍攝地點、亞種或性別可能與台灣個體不同。</li>
+        <li>本工具內容（文字說明、介面、3D 模型）僅供教學、課程及個人使用，禁止未經授權公開發布、販售或商業化使用。</li>
+      </ul>
+    </div>
+    <p style="margin:12px 0 0"><button class="pbtn" type="button" id="btnEtq3">🔭 看賞鳥須知</button></p>
+    <div class="creator-box">
+      <p style="margin:0"><strong>創作者：Mark Tsai（蔡豐全）</strong></p>
+      <p style="margin:4px 0">勞動力發展署創業顧問（2017 起）、經濟部 SBIR 海選專案評審委員（2019－2024），長期擔任小型企業人力提升計畫顧問與多項政府計畫業師、評審委員；專長銷售數據分析、AI 工具運用、政府補助計畫申請、創業與跨境電商。</p>
+      <p style="margin:0"><a href="manual.html#creator" target="_blank" rel="noopener">完整經歷與證照</a>｜<a href="mailto:tsaimark@gmail.com">tsaimark@gmail.com</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="photos.js"></script>
+<script src="scene.js"></script>
+<script src="app.js"></script>
+
+<script>
+/* ================= 頂部跑馬燈 — 獨立運作，沿用工作區共用授權伺服器的公告內容 ================= */
+(function () {
+  'use strict';
+  var MARQUEE_CHECK_URL = "https://script.google.com/macros/s/AKfycbwKX0DNNbY8y4nf90BFTHtxgfqJcHHcZasRrgycl4QAe52_hkjMWSkYk4xOsqU-JPCROw/exec";
+  var STORAGE_KEY = 'birdAtlasMarquee';
+  var REFRESH_MS = 20 * 60 * 1000;
+
+  var bar = document.getElementById('marqueeBar');
+  var track = document.getElementById('marqueeTrack');
+  var lastKey = null;
+
+  function loadCache() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function saveCache(items) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); } catch (e) {}
+  }
+  function appendParsedText(container, text) {
+    var re = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+    var lastIndex = 0, m;
+    while ((m = re.exec(text))) {
+      if (m.index > lastIndex) container.appendChild(document.createTextNode(text.slice(lastIndex, m.index)));
+      var a = document.createElement('a');
+      a.href = m[2]; a.textContent = m[1]; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.style.color = 'inherit'; a.style.textDecoration = 'underline';
+      container.appendChild(a);
+      lastIndex = re.lastIndex;
+    }
+    if (lastIndex < text.length) container.appendChild(document.createTextNode(text.slice(lastIndex)));
+  }
+  function buildTrackContent(items) {
+    var frag = document.createDocumentFragment();
+    function appendPass() {
+      items.forEach(function (item, idx) {
+        if (idx > 0) frag.appendChild(document.createTextNode('　★　'));
+        appendParsedText(frag, item);
+      });
+    }
+    appendPass();
+    frag.appendChild(document.createTextNode('　★　'));
+    appendPass();
+    return frag;
+  }
+  function render(items) {
+    if (!items || !items.length) return;
+    var key = JSON.stringify(items);
+    if (key === lastKey) return;
+    lastKey = key;
+    track.innerHTML = '';
+    track.appendChild(buildTrackContent(items));
+    bar.classList.add('show');
+    document.body.classList.add('has-marquee');
+    var width = track.scrollWidth / 2;
+    track.style.animationDuration = Math.max(width / 80, 10) + 's';
+  }
+  function fetchMarquee() {
+    fetch(MARQUEE_CHECK_URL, { method: 'POST', body: JSON.stringify({ serial: '' }) })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && Array.isArray(data.marquee) && data.marquee.length) {
+          saveCache(data.marquee);
+          render(data.marquee);
+        }
+      })
+      .catch(function () {});
+  }
+
+  render(loadCache());
+  fetchMarquee();
+  setInterval(fetchMarquee, REFRESH_MS);
+})();
+</script>
+<script>
+/* ================= 加入主畫面（PWA） ================= */
+(function () {
+  'use strict';
+  var deferredPrompt = null;
+  var btn = document.getElementById('installBtn');
+
+  var ua = navigator.userAgent || '';
+  var isIOSDevice = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var isMacDesktop = /Macintosh/.test(ua) && !isIOSDevice;
+  var isSafariEngine = /^((?!chrome|crios|fxios|edgios|android).)*safari/i.test(ua);
+  var isStandalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+
+  function fallbackMessage() {
+    if (isIOSDevice) return '請點畫面上的「分享」圖示，選「加入主畫面」';
+    if (isMacDesktop && isSafariEngine) return '請用選單列「檔案」→「加入 Dock」（Safari 17 以上）';
+    return '瀏覽器不支援，或已安裝過';
+  }
+
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+  window.addEventListener('appinstalled', function () {
+    deferredPrompt = null;
+  });
+
+  if (btn) {
+    if (isStandalone) {
+      btn.style.display = 'none';
+    } else {
+      btn.addEventListener('click', function () {
+        if (!deferredPrompt) {
+          window.alert(fallbackMessage());
+          return;
+        }
+        try {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function () { deferredPrompt = null; });
+        } catch (err) {
+          window.alert(fallbackMessage());
+        }
+      });
+    }
+  }
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('service-worker.js').catch(function () {});
+    });
+  }
+})();
+</script>
+</body>
+</html>
